@@ -1,10 +1,10 @@
 # NAI_LAB5
 
 ### Pytania:
-Sex (1 - Woman; 2 - Man)
-Age (1 - Under 18; 2 - 18-26; 3 - 27-35; 4 - 36-50; 5 - More than 50)
-Do you like animals? (1 - Yes; 2 - No; 3 - Hard to say)
-Do you have animal? (1 - Yes; 2 - No)
+-Sex (1 - Woman; 2 - Man)
+-Age (1 - Under 18; 2 - 18-26; 3 - 27-35; 4 - 36-50; 5 - More than 50)
+-Do you like animals? (1 - Yes; 2 - No; 3 - Hard to say)
+-Do you have animal? (1 - Yes; 2 - No)
 
 ### Dane: 
 Zbiór danych własny, uzupełniany przez znajomych i znajomych znajomych. 
