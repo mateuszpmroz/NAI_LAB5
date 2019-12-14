@@ -3,54 +3,125 @@ from sklearn import linear_model
 import matplotlib.pyplot as plt
 from io import StringIO
 import csv
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits import mplot3d
 
-
-dataCsv = '''
--0.86,4.38,
-2.58,6.97,
-4.17,7.01,
-2.6,5.44,
-5.13,6.45,
-3.23,5.49,
--0.26,4.25,
-2.76,5.94,
-0.47,4.8,
--3.9,2.7,
-0.27,3.26,
-2.88,6.48,
--0.54,4.08,
--4.39,0.09,
--1.12,2.74,
-2.09,5.8
+# data
+dataCsv = '''1,2,1,2
+2,2,1,1
+1,2,1,1
+1,2,1,1
+1,2,1,2
+1,2,1,1
+2,2,1,2
+1,5,1,2
+1,2,1,1
+1,2,1,1
+1,2,1,2
+2,3,1,1
+1,2,1,1
+1,2,1,2
+1,4,1,2
+2,2,1,1
+1,2,3,2
+2,2,1,2
+1,2,1,2
+1,2,1,1
+2,5,1,2
+1,2,1,1
+1,1,1,1
+1,2,1,1
+1,2,1,1
+1,2,1,1
+1,2,1,2
+1,2,1,2
+1,2,1,1
+1,2,1,2
+1,2,1,1
+1,2,1,1
+1,2,3,2
+1,2,1,1
+1,2,1,2
+1,2,1,1
+1,2,1,1
+1,4,1,1
+1,2,1,2
+1,2,1,1
+1,1,1,1
+1,2,1,1
+1,4,1,2
+1,2,1,1
+2,2,2,1
+1,2,1,2
+1,4,1,1
+1,2,1,1
+2,5,1,1
+1,2,1,1
+1,2,1,2
+1,2,1,2
+1,2,1,1
+1,5,1,1
+1,2,1,1
+1,5,1,2
+1,2,1,1
+1,2,1,1
+2,1,1,1
+1,5,1,1
+1,2,1,1
+2,2,1,1
+1,2,2,2
+1,2,1,1
+1,2,1,2
+1,2,1,1
+1,4,1,2
+2,2,1,1
+1,2,1,1
+2,2,1,1
+1,3,1,1
+1,2,1,2
+2,3,1,2
+2,2,1,1
+2,2,1,2
+1,2,1,1
+2,2,1,2
+1,2,1,1
+1,3,1,1
+1,2,1,1
+2,2,1,2
 '''
 f = StringIO(dataCsv)
 reader = csv.reader(f, delimiter=',')
 
-data = []
+data = list(reader)
+dataX = []
+dataY = []
+dataZ = []
+dataC = []
+for row in data:
+  # Sex (1 - Woman; 2 - Man)
+  dataX.append(int(row[0]))
+  # Age (1 - Under 18; 2 - 18-26; 3 - 27-35; 4 - 36-50; 5 - More than 50)
+  dataY.append(int(row[1]))
+  # Do you like animals? (1 - Yes; 2 - No; 3 - Hard to say)
+  dataZ.append(int(row[2]))
+  # Do you have animal? (1 - Yes; 2 - No)
+  dataC.append(int(row[3]))
 
-for row in reader:
-    data = row[0:]
 
 
-print(data)
-plik_wejsciowy = "mydata.txt"
-print(data)
-X, y = data[:, :-1], data[:, -1]
-print(X)
-print(y)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.set_xlabel('Sex')
+ax.set_ylabel('Age')
+ax.set_zlabel('Do you like animals?')
+plt.title('Owning a pet',fontsize=18)
+ax.set_xticklabels([0, 1, 2])
+ax.set_yticklabels([0, 1, 2, 3, 4, 5])
+ax.set_zticklabels([0, 1, 2, 3])
 
-num_traing = int(len(X)*0.9)
-num_test = len(X) - num_traing
-
-X_tran, y_tran = X[:num_traing], y[:num_traing]
-X_test, y_test = X[num_traing:], y[num_traing:]
-
-regressor = linear_model.HuberRegressor()
-regressor.fit(X_tran, y_tran)
-
-y_test_pred = regressor.predict(X_test)
-
-plt.scatter(X_test, y_test, color='red')
-plt.plot(X_test, y_test_pred, color='black')
+img = plt.scatter(dataX, dataY, dataZ, c=dataC, cmap='hsv', linewidth=5)
+fig.colorbar(img)
 
 plt.show()
+
+# Mateusz Mróz s15192
